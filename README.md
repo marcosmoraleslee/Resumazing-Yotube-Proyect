@@ -1,17 +1,17 @@
-## ResuMazing — YouTube RAG Pipeline
+# ResuMazing — YouTube RAG Pipeline
 A complete end‑to‑end workflow that transforms any YouTube video into searchable, timestamp‑aware knowledge using audio ingestion → transcription → chunking → embeddings → Pinecone.
 
-📌 Overview
+### 📌 Overview
 ResuMazing is a modular pipeline designed to convert YouTube content into structured data suitable for semantic search and Retrieval‑Augmented Generation (RAG).
 The project downloads audio, transcribes it with Whisper, chunks the transcript, generates embeddings with OpenAI, and stores them in Pinecone for fast vector search.
 
 The repository is organized into three notebooks, each representing a core stage of the pipeline.
 
-🧩 Pipeline Architecture
-Notebook 1 — Ingestion
+## 🧩 Pipeline Architecture
+### Notebook 1 — Ingestion
 Handles URL parsing and audio extraction.
 
-Key features:
+### Key features:
 
 Extracts YouTube video IDs from both standard and shortened URLs.
 
@@ -24,7 +24,7 @@ Creates session_state.json to store the active video ID for downstream notebooks
 Output:  
 A clean MP3 file and a persistent session state.
 
-Notebook 2 — Transcription
+### Notebook 2 — Transcription
 Generates a timestamped transcript using Whisper.
 
 Key features:
@@ -44,7 +44,7 @@ Saves the final transcript as VIDEO_ID.txt in data/.
 Output:  
 A structured transcript ready for chunking and embedding.
 
-Notebook 3 — Chunk & Embed
+### Notebook 3 — Chunk & Embed
 Transforms the transcript into vector embeddings stored in Pinecone.
 
 Key features:
@@ -129,6 +129,101 @@ Educational content indexing
 RAG-powered applications
 
 Interactive dashboards
+
+### Notebook 4 - RAG Chat Engine (Multi‑Turn + Memory + Debug)
+
+This project includes a production‑ready multi‑turn RAG chat function that powers the conversational experience in ResuMazing. It combines conversation history, query rewriting, Pinecone retrieval, structured prompting, and detailed debugging to deliver grounded, context‑aware responses.
+
+Core Responsibilities
+Maintain conversation history across turns
+
+Rewrite user questions into standalone queries for better retrieval
+
+Fetch relevant video chunks from Pinecone
+
+Build a structured LLM prompt using history + context
+
+Generate safe, grounded answers
+
+Track token usage for debugging and cost monitoring
+
+Update memory with each interaction
+
+How the Chat Function Works
+Load Conversation State  
+Retrieves previous messages and checks if the user is starting a new session.
+
+Rewrite the Question  
+Converts the user query into a standalone form optimized for semantic search.
+
+Retrieve Context from Pinecone  
+Performs vector search and assembles a clean context block with timestamps.
+
+Save User Message  
+Adds the new user message to the session history.
+
+Format Conversation History  
+Converts the full history into a readable text block for the prompt.
+
+Build the RAG Prompt  
+Includes:
+
+System persona
+
+First‑message behavior
+
+Conversation history
+
+Retrieved video context
+
+User question
+Ensures friendly tone, grounded answers, and no hallucinations.
+
+Generate the Response  
+Calls the LLM and captures:
+
+Prompt tokens
+
+Completion tokens
+
+Total cost
+
+Debug Output  
+Prints detailed diagnostics:
+
+Timestamp
+
+Session ID
+
+First‑message flag
+
+Token breakdown
+
+OpenAI usage
+
+Question + answer
+
+Save Assistant Response  
+Stores the generated answer in the conversation history.
+
+Result
+A robust, fully‑featured RAG chat engine supporting:
+
+Multi‑turn memory
+
+Query rewriting
+
+Pinecone retrieval
+
+Timestamp‑aware context
+
+Structured prompting
+
+Token accounting
+
+Safe, grounded responses
+
+This function serves as the backbone of the conversational experience in both the notebook pipeline and the Streamlit application.
 
 
 ## 🖥️ Streamlit Application (Production Phase)
