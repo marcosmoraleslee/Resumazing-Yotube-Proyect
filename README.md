@@ -130,6 +130,69 @@ RAG-powered applications
 
 Interactive dashboards
 
+
+## 🖥️ Streamlit Application (Production Phase)
+The project is currently evolving from a notebook‑based pipeline into a fully interactive Streamlit application. This app will serve as the front‑end layer of ResuMazing, allowing users to process YouTube videos and interact with the RAG system in a clean, intuitive interface.
+
+Current Progress
+We are actively developing the Streamlit UI and several core features are already functional:
+
+YouTube Link Ingestion (Working):  
+Users can paste a YouTube URL directly into the app.
+The ingestion service validates the link, extracts the video ID, and triggers the audio download pipeline seamlessly.
+
+Model Conversation (Working):  
+The chat interface is operational.
+Users can ask questions about the processed video, and the app retrieves relevant chunks from Pinecone to generate accurate, context‑aware responses.
+
+Session Management (Working):  
+The app maintains state across user actions using st.session_state, ensuring smooth transitions between ingestion, processing, and chat.
+
+In Progress
+We are refining the user experience and adding new capabilities:
+
+Improved UX/UI:  
+Enhancing layout, spacing, mobile responsiveness, and visual hierarchy.
+Adjusting container spacing, centering elements (such as the logo), and improving readability.
+
+Additional Features:
+
+Suggested questions based on the video content
+
+Progress indicators during ingestion and transcription
+
+Optional voice input for asking questions
+
+Better error handling and user feedback
+
+Cleaner modular structure (modules/ folder for services and UI utilities)
+
+Goal of the Streamlit App
+The final application will allow users to:
+
+Paste a YouTube link
+
+Process the video end‑to‑end (audio → transcript → chunks → embeddings)
+
+View a summary of the video
+
+Ask questions via text or voice
+
+Receive precise answers powered by Pinecone + OpenAI
+
+Enjoy a polished, modern UI inspired by tools like NotebookLM
+
+This Streamlit layer transforms the pipeline into a real product—accessible, interactive, and ready for demos or deployment.
+
+<img width="1837" height="815" alt="image" src="https://github.com/user-attachments/assets/3a5a209c-afa8-4347-88ad-2489b0216d52" />
+
+<img width="1762" height="847" alt="image" src="https://github.com/user-attachments/assets/2e4a9c94-a103-4334-a850-9c983232603a" />
+
+<img width="1782" height="857" alt="image" src="https://github.com/user-attachments/assets/32a95bde-ba24-43c2-b1c8-c567090f34fd" />
+
+
+
+
 🤝 Contributing
 Contributions, improvements, and feature extensions are welcome.
 Feel free to open an issue if you want to expand the project (Streamlit UI, full RAG backend, LangChain integration, etc.).
@@ -137,3 +200,5 @@ Feel free to open an issue if you want to expand the project (Streamlit UI, full
 👤 Author
 Marcos Morales — AI Engineering Bootcamp @ Ironhack
 Madrid, Spain
+
+
