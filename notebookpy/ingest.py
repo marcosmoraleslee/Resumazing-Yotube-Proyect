@@ -35,17 +35,24 @@ def download_youtube_audio(url: str) -> tuple[str, str]:
         audio_path
     """
 
+    # Extract ID
     video_id = extract_youtube_id(url)
 
+    # Ensure data directory exists
     DATA_DIR.mkdir(exist_ok=True)
 
-    output_template = str(
-        DATA_DIR / f"{video_id}.%(ext)s"
-    )
+    # Output template
+    output_template = str(DATA_DIR / f"{video_id}.%(ext)s")
 
+    # yt-dlp configuration (🔥 FIX 403 INCLUDED)
     ydl_opts = {
         "format": "bestaudio/best",
         "outtmpl": output_template,
+
+        # 🔥 FIX 403 Forbidden
+        "cookiesfrombrowser": "chrome",   # o "edge"
+        "extractor_args": {"youtube": {"player_client": ["android"]}},
+
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",
@@ -56,9 +63,10 @@ def download_youtube_audio(url: str) -> tuple[str, str]:
         "quiet": True,
     }
 
+    # Download audio
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-    audio_path = DATA_DIR / f"{video_id}.mp3"
+    audio_path = str(DATA_DIR / f"{video_id}.mp3")
 
-    return video_id, str(audio_path)
+    return video_id, audio_path
