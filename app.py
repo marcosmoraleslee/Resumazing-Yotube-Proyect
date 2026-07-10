@@ -1,3 +1,6 @@
+import sys
+import os
+
 import streamlit as st
 
 from notebookpy.ingest import download_youtube_audio
