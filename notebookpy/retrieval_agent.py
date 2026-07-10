@@ -92,7 +92,7 @@ agent = create_tool_calling_agent(
 agent_executor = AgentExecutor(
     agent=agent,
     tools=[optimize_resume_tool],
-    verbose=True,
+    verbose=False,
     max_iterations=2, # MAX ITERATIONS SET TO 2 TO AVOID INFINITE LOOPING
     early_stopping_method="force",
 )
